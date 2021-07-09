@@ -1,3 +1,8 @@
+Additional restrictions from the author-----------------
+You cannot use the word "premium" in the name of the file with the source code and also indicate the premium level higher than your own.
+For example, you cannot name the file "easyc.premium.js" if you haven’t paid for the premium, and also you cannot use "easyc.premiumX5.js" if you only paid for X4.
+--------------------------------------------------------
+
 MIT License
 
 Copyright (c) 2021 fakt309
@@ -19,3 +24,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
