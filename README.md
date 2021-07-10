@@ -3,7 +3,7 @@
 ## Quick start
 
 Quick start and documentation: [gaidadei.ru/easycanvas](https://gaidadei.ru/easycanvas)  
-Download: [gaidadei.ru/easycanvas/download](https://gaidadei.ru/easycanvas/download)
+Download: [gaidadei.ru/easycanvas/easyc.zip](https://gaidadei.ru/easycanvas/easyc.zip)
 
 Download the file easyc.js and use this code:
 
