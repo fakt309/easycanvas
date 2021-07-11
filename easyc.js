@@ -1,4 +1,4 @@
-//version 1.0 not premium
+//version 1.1 not premium
 
 function EasyC(canvas, objects) {
   this.canvas = null;
@@ -11,16 +11,6 @@ function EasyC(canvas, objects) {
     }
   }
   return this;
-}
-EasyC.prototype.setCanvas = function(canvas) {
-  this.canvas = canvas;
-}
-EasyC.prototype.addObjects = function(objects) {
-  this.objects.concat(objects);
-}
-EasyC.prototype.removeObjects = function(p, l) {
-  if (!l) { l = 1 }
-  this.objects.splice(p, l);
 }
 EasyC.prototype.cloneObject = function(obj) {
   var answer = {};
@@ -194,7 +184,8 @@ EasyC.prototype.setRelative = function(obj) {
   }
   obj.relative = relative;
 }
-EasyC.prototype.draw = function(success, i) {
+EasyC.prototype.draw = function(success, i, sorted) {
+  if (!sorted) { sorted = this.getSortedIndexes() }
   if (!i) { i = 0; }
   if (i >= this.objects.length) {
     if (success) { success(); }
@@ -202,7 +193,7 @@ EasyC.prototype.draw = function(success, i) {
   }
 
   var ctx = this.canvas.getContext('2d');
-  var obj = this.objects[i];
+  var obj = this.objects[sorted[i]];
 
   this.setRelative(obj);
 
@@ -271,7 +262,7 @@ EasyC.prototype.draw = function(success, i) {
         obj.fill += ", "+val;
       }
       obj.fill += ")";
-      tmp.draw(success, i);
+      tmp.draw(success, i, sorted);
     });
     return true;
   }
@@ -289,7 +280,7 @@ EasyC.prototype.draw = function(success, i) {
         obj.stroke.fill += ", "+val;
       }
       obj.stroke.fill += ")";
-      tmp.draw(success, i);
+      tmp.draw(success, i, sorted);
     });
     return true;
   }
@@ -297,7 +288,7 @@ EasyC.prototype.draw = function(success, i) {
     var tmp = this;
     this.loadImage(obj.src, function(id) {
       obj.src = "res("+id+")";
-      tmp.draw(success, i);
+      tmp.draw(success, i, sorted);
     });
     return true;
   }
@@ -309,12 +300,11 @@ EasyC.prototype.draw = function(success, i) {
       var data = obj.font.slice(4, -1).split(/[ ]*,[ ]*/g);
       var url = data[0].split("/");
       var nameFont = url[url.length-1].split(".")[0];
-      console.log(nameFont, url.join("/"));
       var f = new FontFace(nameFont, "url("+url.join("/")+")");
       f.load().then(function(ff) {
         document.fonts.add(ff);
         obj.font = nameFont;
-        tmp.draw(success, i);
+        tmp.draw(success, i, sorted);
       });
       return false;
     }
@@ -457,7 +447,7 @@ EasyC.prototype.draw = function(success, i) {
   }
   ctx.restore();
 
-  this.draw(success, ++i);
+  this.draw(success, ++i, sorted);
 }
 EasyC.prototype.getFill = function(obj, stroke) {
   var answer = false;
@@ -491,7 +481,6 @@ EasyC.prototype.getFill = function(obj, stroke) {
     var translate = data[1].split("/");
     var scale = data[2].split("/");
     var size = this.getSize(obj);
-    console.log(size);
     if (scale.length == 1) {
       scale = [parseFloat(scale[0]), parseFloat(scale[0])];
     } else if (scale.length == 2) {
@@ -564,4 +553,25 @@ EasyC.prototype.drawShape = function(obj) {
     }
   }
   ctx.closePath();
+}
+EasyC.prototype.getSortedIndexes = function() {
+  var answer = [];
+  var objects = this.objects;
+
+  for (var i = 0; i < objects.length; i++) {
+    if (!objects[i].z) { objects[i].z = 0; }
+    answer[i] = i;
+  }
+
+  for (var i = 0; i < objects.length-1; i++) {
+    for (var j = 0; j < objects.length-1-i; j++) {
+      if (objects[answer[j]].z > objects[answer[j+1]].z) {
+        var tmp = answer[j];
+        answer[j] = answer[j+1];
+        answer[j+1] = tmp;
+      }
+    }
+  }
+
+  return answer;
 }
