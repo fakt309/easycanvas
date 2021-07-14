@@ -2,7 +2,7 @@
 
 ## Quick start
 
-**Quick start and documentation: [gaidadei.ru/easycanvas](https://gaidadei.ru/easycanvas)**  
+**Documentation: [gaidadei.ru/easycanvas](https://gaidadei.ru/easycanvas)**  
 **Download: [gaidadei.ru/easycanvas/easyc.zip](https://gaidadei.ru/easycanvas/easyc.zip)** 
 
 Buy premium: [gaidadei.ru/easycanvas/premium](https://gaidadei.ru/easycanvas/easyc.zip) *(Absolutely no different from the free version, but you have the right to change the file name to "easyc.premium.js")*
@@ -83,7 +83,7 @@ Just add a simple object and the library will draw it (for example: "circle", "t
       width: 150,
       src: "2.png",
       scale: [1, 1]
-    },
+    }]).draw();
 
 ![draw canvas html](https://user-images.githubusercontent.com/43887554/125615412-21fdc42f-17ed-40fb-a940-dd1d80d66762.png)
 ![draw canvas html](https://user-images.githubusercontent.com/43887554/125615465-a95febf2-c976-4d8c-b38f-3396014d40a0.png)
@@ -98,7 +98,7 @@ Just add a simple object and the library will draw it (for example: "circle", "t
 
     src: "2.png"  
     font: "url(ShareTechMono.ttf)"
-    fill: "url(2.png), 0, 0.2, repeat)"
+    fill: "url(2.png), 0, 0.2, repeat"
 
 ![draw canvas html image](https://user-images.githubusercontent.com/43887554/125616462-9eb5518e-1b05-4396-8a09-ea44b4261739.png)
 
@@ -106,7 +106,7 @@ Just add a simple object and the library will draw it (for example: "circle", "t
 ## Very easy make gradient
 
     fill: "grad(linear, 45, 0 #0000ff, 1, #00ff00)"
-    fill: "grad(radial, 0 #0000ff, 1, #00ff00)"![docs13](https://user-images.githubusercontent.com/43887554/125616713-2cefcb7d-d31c-4154-a85f-32f40e98ea07.png)
+    fill: "grad(radial, 0, #0000ff, 1, #00ff00)"
 
 ![gradien canvas html](https://user-images.githubusercontent.com/43887554/125616673-38a35d0e-34e9-4747-9852-8462ba92669b.png)
 
